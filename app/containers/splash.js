@@ -1,13 +1,15 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+
 import Splash from '../components/splash';
+import { layouts } from '../styles';
 
 class SplashWrapper extends Component {
   render() {
     return(
-      <View>
+      <View style={layouts.container}>
         <Splash
           onForward={this.props.onForward}
           text={this.props.text}
@@ -29,12 +31,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 const SplashContainer = connect(mapStateToProps, mapDispatchToProps)(SplashWrapper);
 export default SplashContainer;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});

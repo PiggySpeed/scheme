@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
-import { colors } from '../styles';
+import { View, Text, Animated, Button } from 'react-native';
+import { colors, logos, layouts } from '../styles';
 
 class PreSplash extends Component {
   state = {
@@ -33,32 +33,22 @@ class PreSplash extends Component {
   }
   render() {
     return(
-      <View style={styles.container}>
+      <View style={layouts.container}>
         <Text>PreSplash  Screen!!!</Text>
         <Animated.Image
-          style={[styles.logo, this.getTransform()]}
+          style={[logos.logoSmall, this.getTransform()]}
           source={require('../assets/bear-color.png')}
+        />
+        <Button
+          title='Go To Login'
+          onPress={this.props.handleClick}
         />
       </View>
     );
 }
 }
 PreSplash.propTypes = {
-
+  handleClick: PropTypes.func.isRequired
 };
 
-
 export default PreSplash;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.white,
-  },
-  logo: {
-    resizeMode: 'contain',
-    width: 50
-  }
-});

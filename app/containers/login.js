@@ -1,33 +1,29 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, Button, TouchableHighlight } from 'react-native';
+import { layouts } from '../styles';
 
 class Login extends Component {
   render() {
     return(
-      <View style={styles.container}>
+      <View style={layouts.container}>
         <TouchableHighlight onPress={this.props.onForward}>
           <Text>{this.props.text}: Tap me to load the next scene</Text>
         </TouchableHighlight>
+        <Button
+          title='View PreSplash Screen'
+          onPress={this.props.handleClick}
+        />
       </View>
     );
   }
 }
 Login.propTypes = {
   onForward: PropTypes.func,
-  text: PropTypes.string
+  text: PropTypes.string,
+  handleClick: PropTypes.func
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});
-
 
 const mapStateToProps = (state) => {
   return { }

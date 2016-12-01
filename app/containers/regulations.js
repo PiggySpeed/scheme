@@ -1,12 +1,13 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
+import { layouts } from '../styles';
 
 class Regulations extends Component {
   render() {
     return(
-      <View style={styles.container}>
+      <View style={layouts.container}>
         <TouchableHighlight onPress={this.props.onBackward}>
           <Text>{this.props.text}: this is regulations</Text>
         </TouchableHighlight>
@@ -23,12 +24,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 const RegulationsContainer = connect(mapStateToProps, mapDispatchToProps)(Regulations);
 export default RegulationsContainer;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});

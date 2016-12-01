@@ -1,15 +1,17 @@
 'use strict';
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import store from './configureStore'
+import React, { Component, PropTypes } from 'react';
 
 import { Navigator } from 'react-native';
+import FooterTabsContainer from '../containers/footertabs';
 import SplashContainer from '../containers/splash';
 import LoginContainer from '../containers/login';
 import MainContainer from '../containers/main';
 import RegulationsContainer from '../containers/regulations';
 
+const footertabs = { id: 'FooterTabs', index: 99 };
+
 const routes = [
+  { id: 'FooterTabs', index: 99 },
   { id: 'Splash', index: 0 },
   { id: 'Login', index: 1 },
   { id: 'Main', index: 2 },
@@ -20,6 +22,7 @@ class SchemeNavigator extends Component {
   constructor(props){
     super(props);
     this.configureScene = this.configureScene.bind(this);
+    this.onOpenFooterTabs = this.onOpenFooterTabs.bind(this);
     this.onForward = this.onForward.bind(this);
     this.onBackward = this.onBackward.bind(this);
     this.getScene = this.getScene.bind(this);
@@ -31,6 +34,9 @@ class SchemeNavigator extends Component {
       ['Main']: Navigator.SceneConfigs.FloatFromLeft,
       ['Regulations']: Navigator.SceneConfigs.PushFromLeft,
     }[route.id]
+  }
+  onOpenFooterTabs(navigator){
+    navigator.push(footertabs);
   }
   onForward(navigator, index) {
     if(index < routes.length) {
@@ -44,10 +50,17 @@ class SchemeNavigator extends Component {
   }
   getScene(route, navigator) {
     switch(route.id) {
+      case 'FooterTabs':
+        return (
+          <FooterTabsContainer
+            navigator={navigator}
+          />
+        );
       case 'Splash':
         return (
           <SplashContainer
-            onForward={() => this.onForward(navigator, route.index)}
+            //onForward={() => this.onForward(navigator, route.index)}
+            onForward={() => this.onOpenFooterTabs()}
             text={route.id}
           />
         );
@@ -56,6 +69,7 @@ class SchemeNavigator extends Component {
           <LoginContainer
             onForward={() => this.onForward(navigator, route.index)}
             onBackward={() => this.onBackward(navigator, route.index)}
+            handleClick={this.props.handleClick}
             text={route.id}
           />
         );
@@ -81,17 +95,18 @@ class SchemeNavigator extends Component {
   }
   render() {
     return(
-      <Provider store={store}>
-        <Navigator
-          initialRoute={routes[0]}
-          initialRouteStack={routes}
-          configureScene={this.configureScene}
-          renderScene={this.getScene}
-          style={{padding: 100}}
-        />
-      </Provider>
+      <Navigator
+        initialRoute={routes[0]}
+        initialRouteStack={routes}
+        configureScene={this.configureScene}
+        renderScene={this.getScene}
+      />
     );
   }
 }
+
+SchemeNavigator.propTypes = {
+  handleClick: PropTypes.func.isRequired
+};
 
 export default SchemeNavigator;
