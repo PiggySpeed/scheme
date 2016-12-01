@@ -1,4 +1,6 @@
-export const SET_FOOTER_TAB = 'SET_FOOTER_TAB';
+import {
+  SET_FOOTER_TAB
+} from './_constants';
 
 export const setFooterTab = (tab) => {
   return {

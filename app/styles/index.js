@@ -1,6 +1,12 @@
 export const colors = {
   white: '#FFF',
-  grey: '#D3D3D3'
+  grey: '#D3D3D3',
+  active: '#D2D2D2',
+  drawer: {
+    unselected: '#e1e1e1',
+    selected: '#D3D3D3'
+  },
+  navbar: '#EBEBEB'
 };
 
 export const fontSizes = {
@@ -20,6 +26,10 @@ export const logos = {
 };
 
 export const layouts = {
+  column: {
+    flex: 1,
+    justifyContent: 'flex-start'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -31,4 +41,5 @@ export const layouts = {
     alignItems: 'center',
     backgroundColor: '#D3D3D3',
   }
+
 };

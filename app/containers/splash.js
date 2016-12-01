@@ -10,17 +10,12 @@ class SplashWrapper extends Component {
   render() {
     return(
       <View style={layouts.container}>
-        <Splash
-          onForward={this.props.onForward}
-          text={this.props.text}
-        />
+        <Splash />
       </View>
     );
   }
 }
 SplashWrapper.propTypes = {
-  onForward: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {

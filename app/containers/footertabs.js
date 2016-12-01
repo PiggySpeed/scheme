@@ -6,6 +6,7 @@ import * as activeFooterTabActions from '../actions/activefootertab';
 import { FooterTabs } from '../components';
 
 const mapStateToProps = ({activeFooterTab}, {navigator}) => {
+  console.log(activeFooterTab);
   return {
     activeFooterTab,
     navigator

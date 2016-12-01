@@ -1,23 +1,61 @@
 'use strict';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, Text, DrawerLayoutAndroid } from 'react-native';
-import { colors, layouts } from '../../styles'
+import { colors, layouts } from '../../styles';
+import Drawer from './drawer';
+import Navbar from '../navbar/navbar';
+import {
+  LoginContainer,
+  MainContainer,
+  RegulationsContainer,
+  SplashContainer
+} from '../../containers';
 
-const FooterTabs = ({onTabSelect, navigator}) => (
-  <DrawerLayoutAndroid
-    drawerWidth={350}
-    renderNavigationView={ () => (
-      <Text>This is the Drawer</Text>
-    )}
-  >
-    <View style={layouts.drawer}>
-      <Text>Welcome!</Text>
-    </View>
-  </DrawerLayoutAndroid>
-);
+class FooterTabs extends Component {
+  constructor(props){
+    super(props);
+    this.getScene = this.getScene.bind(this);
+    this.openDrawer = this.openDrawer.bind(this);
+    this.closeDrawer = this.closeDrawer.bind(this);
+  }
+  getScene(key) {
+    const scene = {
+      ['Main']: <MainContainer /> ,
+      ['Regulations']: <RegulationsContainer />
+    }[key];
+    return scene || <SplashContainer />;
+  };
+  openDrawer(){
+    this.drawer.openDrawer();
+  };
+  closeDrawer(){
+    this.drawer.closeDrawer();
+  };
+  render() {
+    return (
+      <DrawerLayoutAndroid
+        style={{flex: 1}}
+        ref={ drawer => this.drawer = drawer }
+        drawerWidth={300}
+        keyboardDismissMode='on-drag'
+        renderNavigationView={ () => (
+        <Drawer
+          activeFooterTab={this.props.activeFooterTab}
+          onTabSelect={this.props.setFooterTab}
+          onClose={this.closeDrawer}
+        />
+      )}
+      >
+        <Navbar title={this.props.activeFooterTab} openDrawer={this.openDrawer} />
+        { this.getScene(this.props.activeFooterTab) }
+      </DrawerLayoutAndroid>
+    )
+  }
+};
 FooterTabs.propTypes = {
-  setFooterTab: PropTypes.func.isRequired,
+  activeFooterTab: PropTypes.string.isRequired,
   navigator: PropTypes.object.isRequired,
+  setFooterTab: PropTypes.func.isRequired,
 };
 
 export default FooterTabs;

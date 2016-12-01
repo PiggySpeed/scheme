@@ -8,9 +8,7 @@ class Regulations extends Component {
   render() {
     return(
       <View style={layouts.container}>
-        <TouchableHighlight onPress={this.props.onBackward}>
-          <Text>{this.props.text}: this is regulations</Text>
-        </TouchableHighlight>
+        <Text>This is Regulations container</Text>
       </View>
     );
   }
