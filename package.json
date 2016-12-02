@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "raw-loader": "^0.5.1",
     "react": "15.4.1",
     "react-native": "0.38.0",
     "react-native-navbar": "^1.5.4",
