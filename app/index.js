@@ -1,10 +1,10 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import store from './config/configureStore'
+import configureStore from './config/configureStore'
 
 import SchemeNavigator from './config/navigator';
-import PreSplash from './components/presplash';
+import { PreSplash } from './components';
 import { View, Text } from 'react-native';
 
 class Scheme extends Component {
@@ -24,7 +24,7 @@ class Scheme extends Component {
   }
   render() {
     return(
-      <Provider store={store}>
+      <Provider store={configureStore}>
         <View style={{flex: 1}}>
           { this.state.viewSplash
             ? <PreSplash handleClick={this.onCloseSplash} />

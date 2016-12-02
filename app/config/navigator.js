@@ -1,16 +1,22 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-
 import { Navigator } from 'react-native';
-import FooterTabsContainer from '../containers/footertabs';
-import SplashContainer from '../containers/splash';
-import LoginContainer from '../containers/login';
-import MainContainer from '../containers/main';
-import RegulationsContainer from '../containers/regulations';
+import {
+  FooterTabsContainer,
+  SplashContainer,
+  MainContainer,
+  RegulationsContainer,
+  SchedulesContainer
+} from '../containers';
+
+const footerTabs = { id: 'FooterTabs', index: 99};
 
 const routes = [
-  { id: 'FooterTabs', index: 99 },
   { id: 'Splash', index: 0 },
+  { id: 'Main', index: 1 },
+  { id: 'Regulations', index: 2 },
+  { id: 'Schedules', index: 3 },
+  footerTabs
 ];
 
 class SchemeNavigator extends Component {
@@ -26,14 +32,17 @@ class SchemeNavigator extends Component {
   }
   getScene(route, navigator) {
     return {
+      ['Splash']: <SplashContainer navigator={navigator} />,
       ['FooterTabs']: <FooterTabsContainer navigator={navigator} />,
-      ['Splash']: <SplashContainer />,
+      ['Main']: <MainContainer navigator={navigator} />,
+      ['Regulations']: <RegulationsContainer navigator={navigator} />,
+      ['Schedules']: <SchedulesContainer navigator={navigator} />,
     }[route.id];
   }
   render() {
     return(
       <Navigator
-        initialRoute={routes[0]}
+        initialRoute={footerTabs}
         initialRouteStack={routes}
         configureScene={this.configureScene}
         renderScene={this.getScene}

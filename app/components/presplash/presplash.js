@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { View, Text, Animated, Button } from 'react-native';
-import { colors, logos, layouts } from '../styles';
+import { colors, logos, layouts } from '../../styles';
 
 class PreSplash extends Component {
   state = {
@@ -37,7 +37,7 @@ class PreSplash extends Component {
         <Text>PreSplash  Screen!!!</Text>
         <Animated.Image
           style={[logos.logoSmall, this.getTransform()]}
-          source={require('../assets/bear-color.png')}
+          source={require('../../assets/bear-color.png')}
         />
         <Button
           title='Go To Login'

@@ -7,9 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "raw-loader": "^0.5.1",
     "react": "15.4.1",
     "react-native": "0.38.0",
     "react-native-navbar": "^1.5.4",
+    "react-native-simple-markdown": "^1.0.60-rc.2",
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
@@ -22,6 +24,7 @@
     "babel-jest": "17.0.2",
     "babel-preset-react-native": "1.9.0",
     "jest": "17.0.3",
-    "react-test-renderer": "15.4.1"
+    "react-test-renderer": "15.4.1",
+    "remote-redux-devtools": "^0.5.4"
   }
 }

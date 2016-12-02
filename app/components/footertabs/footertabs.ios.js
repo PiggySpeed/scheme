@@ -5,10 +5,10 @@ import { Text, TabBarIOS } from 'react-native';
 import { colors } from '../../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
-  LoginContainer,
   MainContainer,
   RegulationsContainer,
-  SplashContainer
+  SplashContainer,
+  SchedulesContainer
 } from '../../containers'
 
 const FooterTabs = ({ activeFooterTab, onTabSelect, navigator }) => (

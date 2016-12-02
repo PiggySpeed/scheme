@@ -1,28 +1,15 @@
 'use strict';
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { bindActionCreators } from 'redux';
+import Splash from '../components/splash/splash';
 
-import Splash from '../components/splash';
-import { layouts } from '../styles';
-
-class SplashWrapper extends Component {
-  render() {
-    return(
-      <View style={layouts.container}>
-        <Splash />
-      </View>
-    );
-  }
-}
-SplashWrapper.propTypes = {
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, {navigator}) => {
   return { }
 };
 const mapDispatchToProps = (dispatch) => {
-  return { }
+  return {
+    navigator
+  }
 };
-const SplashContainer = connect(mapStateToProps, mapDispatchToProps)(SplashWrapper);
+const SplashContainer = connect(mapStateToProps, mapDispatchToProps)(Splash);
 export default SplashContainer;

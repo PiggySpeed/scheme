@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import Main from './main';
-import activeFooterTab from './activefootertab';
+import FooterTabs from './footertabs';
 
 const rootReducer = combineReducers(
   {
     Main,
-    activeFooterTab
+    FooterTabs
   }
 );
 

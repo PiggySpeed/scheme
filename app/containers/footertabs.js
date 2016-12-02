@@ -1,14 +1,13 @@
 'use strict';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as activeFooterTabActions from '../actions/activefootertab';
+import * as activeFooterTabActions from '../actions/footertabs';
 
 import { FooterTabs } from '../components';
 
-const mapStateToProps = ({activeFooterTab}, {navigator}) => {
-  console.log(activeFooterTab);
+const mapStateToProps = ({FooterTabs}, {navigator}) => {
   return {
-    activeFooterTab,
+    activeFooterTab: FooterTabs.activeFooterTab,
     navigator
   }
 };

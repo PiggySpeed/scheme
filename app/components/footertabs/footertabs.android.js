@@ -5,11 +5,12 @@ import { colors, layouts } from '../../styles';
 import Drawer from './drawer';
 import Navbar from '../navbar/navbar';
 import {
-  LoginContainer,
   MainContainer,
   RegulationsContainer,
-  SplashContainer
+  SplashContainer,
+  SchedulesContainer
 } from '../../containers';
+
 
 class FooterTabs extends Component {
   constructor(props){
@@ -20,8 +21,10 @@ class FooterTabs extends Component {
   }
   getScene(key) {
     const scene = {
+      ['Splash']: <SplashContainer />,
       ['Main']: <MainContainer /> ,
-      ['Regulations']: <RegulationsContainer />
+      ['Regulations']: <RegulationsContainer />,
+      ['Schedules']: <SchedulesContainer />,
     }[key];
     return scene || <SplashContainer />;
   };
@@ -39,12 +42,13 @@ class FooterTabs extends Component {
         drawerWidth={300}
         keyboardDismissMode='on-drag'
         renderNavigationView={ () => (
-        <Drawer
-          activeFooterTab={this.props.activeFooterTab}
-          onTabSelect={this.props.setFooterTab}
-          onClose={this.closeDrawer}
-        />
-      )}
+          <Drawer
+            activeFooterTab={this.props.activeFooterTab}
+            onTabSelect={this.props.setFooterTab}
+            onClose={this.closeDrawer}
+            selectChapter={this.props.selectChapter}
+          />
+        )}
       >
         <Navbar title={this.props.activeFooterTab} openDrawer={this.openDrawer} />
         { this.getScene(this.props.activeFooterTab) }
@@ -56,6 +60,7 @@ FooterTabs.propTypes = {
   activeFooterTab: PropTypes.string.isRequired,
   navigator: PropTypes.object.isRequired,
   setFooterTab: PropTypes.func.isRequired,
+  selectChapter: PropTypes.func.isRequired,
 };
 
 export default FooterTabs;

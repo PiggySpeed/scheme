@@ -14,8 +14,10 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { }
+const mapStateToProps = (state, {navigator}) => {
+  return {
+    navigator
+  }
 };
 const mapDispatchToProps = (dispatch) => {
   return { }
