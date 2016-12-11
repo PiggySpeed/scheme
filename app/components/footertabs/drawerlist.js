@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { Text, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
+import { TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
 import DrawerListItem from './drawerlistitem';
 import DrawerListHeader from './drawerlistheader';
 
@@ -10,14 +10,14 @@ class DrawerList extends Component {
     this.state = {
       isOpen: false,
       height: new Animated.Value(this.props.height),
-      currentListItem: ''
+      chapterId: ''
     };
     this.getHeight = this.getHeight.bind(this);
     this.onToggle = this.onToggle.bind(this);
     this.onSelectChapter = this.onSelectChapter.bind(this);
   }
   get fullListHeight() {
-    return this.props.height * this.props.data.length;
+    return this.props.height * this.props.chapters.length;
   }
   getHeight(){
     return this.state.isOpen
@@ -25,13 +25,14 @@ class DrawerList extends Component {
       : this.fullListHeight
   }
   onToggle(){
-    this.props.onSelectChapter(this.props.route, this.props.home.route);
+    this.props.onSelectChapter(this.props.route, ''); // navigate to the section home page
     Animated.timing(this.state.height, {toValue: this.getHeight(), duration: 200}).start();
     this.setState({ isOpen: !this.state.isOpen })
   }
-  onSelectChapter(currentListItem) {
-    this.setState({ currentListItem });
-    this.props.onSelectChapter(this.props.route, currentListItem);
+  onSelectChapter(chapterId) {
+    this.setState({ chapterId });
+    this.props.onSelectChapter(this.props.route, chapterId);
+    this.props.onClose();
   }
   render() {
     return(
@@ -45,14 +46,14 @@ class DrawerList extends Component {
           onPress={this.onToggle}
         />
 
-        { this.props.data.map( (item, id) =>
+        { this.props.chapters.map( (item, id) =>
           <DrawerListItem
             key={item.id}
             index={id + 1}
-            text={item.text}
+            text={item.title}
             height={this.props.height}
-            isSelected={this.state.currentListItem === item.route}
-            onPress={() => this.onSelectChapter(item.route)}
+            isSelected={this.state.chapterId === item.id}
+            onPress={() => this.onSelectChapter(item.id)}
           />
         )}
 
@@ -65,10 +66,10 @@ DrawerList.propTypes = {
   iconName: PropTypes.string,
   title: PropTypes.string,
   route: PropTypes.string,
-  home: PropTypes.object,
   height: PropTypes.number,
-  data: PropTypes.array,
-  selectChapter: PropTypes.func,
+  chapters: PropTypes.array,
+  onSelectChapter: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
 };
 DrawerList.defaultProps = {
   height: 35

@@ -1,9 +1,9 @@
 import * as types from '../actions/_constants';
 
-import { CONTENT_PATHS } from '../'
-
 const initialState = {
-  activeFooterTab: 'Main'
+  activeFooterTab: 'Main',
+  chapterId: '',
+  pharmaCareChapters: []
 };
 
 const FooterTabs = (state = initialState, action) => {
@@ -16,7 +16,12 @@ const FooterTabs = (state = initialState, action) => {
     case types.SELECT_CHAPTER:
       return {
         ...state,
-        regulationsData: action.regulationsData
+        chapterId: action.chapterId
+      };
+    case types.GET_PHARMACARE_CHAPTERS:
+      return {
+        ...state,
+        pharmaCareChapters: action.data
       };
     default:
       return state

@@ -10,7 +10,8 @@ const DrawerTab = ({ title, selected, onPress, iconName }) => {
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Icon
         name={iconName}
-        size={35}
+        style={styles.icon}
+        size={25}
         color={color}
       />
       <Text style={[styles.titleText, {color}]}>{title}</Text>
@@ -26,15 +27,17 @@ DrawerTab.propTypes = {
 
 const styles = {
   container: {
-    margin: 10,
-    marginLeft: 20,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 35
   },
   titleText: {
     fontSize: fontSizes.secondary,
-    marginLeft: 10
-  }
+  },
+  icon: {
+    marginLeft: 15,
+    marginRight: 10
+  },
 };
 
 export default DrawerTab;

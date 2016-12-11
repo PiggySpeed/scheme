@@ -1,20 +1,33 @@
+import { retrievePharmaCareChapters } from '../database/realm';
 import {
+  GET_PHARMACARE_CHAPTERS,
   SET_FOOTER_TAB,
-  SELECT_CHAPTER
+  SELECT_CHAPTER,
 } from './_constants';
 
-export const setFooterTab = (tab) => {
-  return {
-    type: SET_FOOTER_TAB,
-    tab
+// Load Chapters
+export const getPharmaCareChapters = () => {
+  return dispatch => {
+    const data = retrievePharmaCareChapters();
+
+    dispatch({ type: GET_PHARMACARE_CHAPTERS, data });
   }
 };
 
-export const selectChapter = (section, chapter) => {
-  const regulationsData = section + chapter;
-
-  return {
-    type: SELECT_CHAPTER,
-    regulationsData: ''
+// Navigation
+export const setFooterTab = (tab) => {
+  return dispatch => {
+    dispatch({ type: SET_FOOTER_TAB, tab })
   }
+};
+
+export const onSelectChapter = (tab, id) => {
+  return (dispatch, getState) => {
+    const { chapterId } = getState().FooterTabs;
+    dispatch(setFooterTab(tab));
+
+    if(id !== chapterId){
+      dispatch({ type: SELECT_CHAPTER, chapterId: id })
+    }
+  };
 };

@@ -6,7 +6,7 @@ import { colors } from '../../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   MainContainer,
-  RegulationsContainer,
+  PharmaCareContainer,
   SplashContainer,
   SchedulesContainer
 } from '../../containers'
@@ -26,11 +26,11 @@ const FooterTabs = ({ activeFooterTab, onTabSelect, navigator }) => (
     <Icon.TabBarItem
       iconSize={35}
       iconName='ios-book'
-      title='Regulations'
-      selected={activeFooterTab === 'Regulations'}
-      onPress={() => onTabSelect('Regulations')}
+      title='PharmaCare'
+      selected={activeFooterTab === 'PharmaCare'}
+      onPress={() => onTabSelect('PharmaCare')}
     >
-      <RegulationsContainer />
+      <PharmaCareContainer />
     </Icon.TabBarItem>
   </TabBarIOS>
 );
@@ -38,6 +38,7 @@ FooterTabs.propTypes = {
   activeFooterTab: PropTypes.string.isRequired,
   setFooterTab: PropTypes.func.isRequired,
   navigator: PropTypes.object.isRequired,
+  pharmaCareChapters: PropTypes.array.isRequired,
 };
 
 export default FooterTabs;

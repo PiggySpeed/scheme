@@ -5,17 +5,14 @@ import {
   FooterTabsContainer,
   SplashContainer,
   MainContainer,
-  RegulationsContainer,
-  SchedulesContainer
+  //PharmaCareContainer,
+  //SchedulesContainer
 } from '../containers';
 
 const footerTabs = { id: 'FooterTabs', index: 99};
-
 const routes = [
   { id: 'Splash', index: 0 },
   { id: 'Main', index: 1 },
-  { id: 'Regulations', index: 2 },
-  { id: 'Schedules', index: 3 },
   footerTabs
 ];
 
@@ -32,11 +29,9 @@ class SchemeNavigator extends Component {
   }
   getScene(route, navigator) {
     return {
-      ['Splash']: <SplashContainer navigator={navigator} />,
       ['FooterTabs']: <FooterTabsContainer navigator={navigator} />,
-      ['Main']: <MainContainer navigator={navigator} />,
-      ['Regulations']: <RegulationsContainer navigator={navigator} />,
-      ['Schedules']: <SchedulesContainer navigator={navigator} />,
+      ['Splash']: <SplashContainer navigator={navigator} />,
+      ['Main']: <MainContainer navigator={navigator} />
     }[route.id];
   }
   render() {

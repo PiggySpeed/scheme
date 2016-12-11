@@ -3,8 +3,12 @@ export const colors = {
   grey: '#D3D3D3',
   active: '#D2D2D2',
   drawer: {
-    unselected: '#e1e1e1',
-    selected: '#D3D3D3'
+    unselected: '#737373',
+    selected: '#373737'
+  },
+  drawerBackground: {
+    unselected: '#FFFFFF',
+    selected: '#c3c3c3'
   },
   navbar: '#EBEBEB'
 };

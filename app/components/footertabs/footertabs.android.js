@@ -6,11 +6,11 @@ import Drawer from './drawer';
 import Navbar from '../navbar/navbar';
 import {
   MainContainer,
-  RegulationsContainer,
+  PharmaCareContainer,
   SplashContainer,
-  SchedulesContainer
+  SchedulesContainer,
+  SettingsContainer
 } from '../../containers';
-
 
 class FooterTabs extends Component {
   constructor(props){
@@ -23,8 +23,9 @@ class FooterTabs extends Component {
     const scene = {
       ['Splash']: <SplashContainer />,
       ['Main']: <MainContainer /> ,
-      ['Regulations']: <RegulationsContainer />,
+      ['PharmaCare']: <PharmaCareContainer />,
       ['Schedules']: <SchedulesContainer />,
+      ['Settings']: <SettingsContainer />,
     }[key];
     return scene || <SplashContainer />;
   };
@@ -46,7 +47,8 @@ class FooterTabs extends Component {
             activeFooterTab={this.props.activeFooterTab}
             onTabSelect={this.props.setFooterTab}
             onClose={this.closeDrawer}
-            selectChapter={this.props.selectChapter}
+            onSelectChapter={this.props.onSelectChapter}
+            pharmaCareChapters={this.props.pharmaCareChapters}
           />
         )}
       >
@@ -55,12 +57,13 @@ class FooterTabs extends Component {
       </DrawerLayoutAndroid>
     )
   }
-};
+}
 FooterTabs.propTypes = {
   activeFooterTab: PropTypes.string.isRequired,
   navigator: PropTypes.object.isRequired,
+  pharmaCareChapters: PropTypes.array.isRequired,
   setFooterTab: PropTypes.func.isRequired,
-  selectChapter: PropTypes.func.isRequired,
+  onSelectChapter: PropTypes.func.isRequired
 };
 
 export default FooterTabs;

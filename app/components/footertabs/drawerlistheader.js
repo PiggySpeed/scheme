@@ -2,16 +2,19 @@
 import React, { PropTypes } from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { colors } from '../../styles';
 
 const DrawerListHeader = ({ text, height, iconName, isSelected, onPress }) => {
-  const icon = !!iconName ? <Icon name={iconName} style={styles.icon} size={25} /> : null;
+  const color = isSelected ? colors.drawer.selected : colors.drawer.unselected;
+  const backgroundColor = isSelected ? colors.drawerBackground.selected : colors.drawerBackground.unselected;
+  const icon = !!iconName ? <Icon name={iconName} style={styles.icon} size={25} color={color} /> : null;
   return (
     <TouchableOpacity
-      style={[ styles.container, {height}, { backgroundColor: isSelected ? '#D2D2D2' : '#FFFFFF' } ]}
+      style={[ styles.container, {height}, { backgroundColor: backgroundColor } ]}
       onPress={onPress}
     >
       { icon }
-      <Text>{text || 'Error - Undefined'}</Text>
+      <Text style={{color: color}}>{text || 'Error - Undefined'}</Text>
     </TouchableOpacity>
   )
 };

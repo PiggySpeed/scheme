@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
 import Main from './main';
 import FooterTabs from './footertabs';
+import {pharmaCareContent} from './pharmacare';
+import {downloadContent} from './database';
 
 const rootReducer = combineReducers(
   {
     Main,
-    FooterTabs
+    FooterTabs,
+    pharmaCareContent,
+    downloadContent
   }
 );
 

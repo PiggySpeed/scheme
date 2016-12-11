@@ -1,10 +1,13 @@
-// define all action constants here
+// Navigation
 export const SET_FOOTER_TAB = 'SET_FOOTER_TAB';
 export const SELECT_CHAPTER = 'SELECT_CHAPTER';
 
+// Initialize Database
+export const BUILD_REALM_SCHEMA = 'BUILD_REALM_SCHEMA';
 
-// mock data
-
-const SCHEMA  = {
-
-};
+// PharmaCare
+export const DOWNLOAD_PHARMACARE_REQUEST = 'DOWNLOAD_PHARMACARE_REQUEST';
+export const DOWNLOAD_PHARMACARE_FAILURE = 'DOWNLOAD_PHARMACARE_FAILURE';
+export const DOWNLOAD_PHARMACARE_SUCCESS = 'DOWNLOAD_PHARMACARE_SUCCESS';
+export const GET_PHARMACARE_CHAPTERS = 'GET_PHARMACARE_CHAPTERS';
+export const GET_PHARMACARE_CONTENT = 'GET_PHARMACARE_CONTENT';
