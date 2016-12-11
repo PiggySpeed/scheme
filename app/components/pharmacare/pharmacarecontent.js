@@ -1,8 +1,8 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { colors, layouts } from '../../styles';
-import Markdown from 'react-native-simple-markdown';
+import Markdown from '../markdown/markdown.js';
 
 class PharmaCareContent extends Component {
   constructor(props){
@@ -12,13 +12,12 @@ class PharmaCareContent extends Component {
     if(this.props.data){
       const { title, text, references } = this.props.data;
       return(
-        <View style={layouts.container}>
+        <ScrollView>
           <Markdown>
-            {title}
             {text}
             {references.map( (item, id) => `\n${item}`)}
           </Markdown>
-        </View>
+        </ScrollView>
       );
     } else {
       return <Text>Loading Content...</Text>
@@ -28,5 +27,6 @@ class PharmaCareContent extends Component {
 PharmaCareContent.propTypes = {
   data: PropTypes.object
 };
+
 
 export default PharmaCareContent;

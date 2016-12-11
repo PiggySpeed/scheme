@@ -19,7 +19,7 @@ export const downloadPharmaCareSuccess = (data) => {
   storePharmaCare(data);
   return { type: DOWNLOAD_PHARMACARE_SUCCESS, status: 'Downloaded PharmaCare Data!' }
 };
-export const downloadPharmaCare = (blogPost) => {
+export const downloadPharmaCare = () => {
   return dispatch => {
     dispatch(downloadPharmaCareRequest());
 

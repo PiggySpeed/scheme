@@ -24,6 +24,7 @@ const Drawer = ({ activeFooterTab, onTabSelect, onSelectChapter, onClose, pharma
       title='PharmaCare'
       route='PharmaCare'
       height={35}
+      selected={activeFooterTab === 'PharmaCare'}
       chapters={pharmaCareChapters}
       onSelectChapter={onSelectChapter}
       onClose={onClose}

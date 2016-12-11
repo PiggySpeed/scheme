@@ -30,7 +30,6 @@ class PharmaCare extends Component {
 }
 PharmaCare.propTypes = {
   contentId: PropTypes.string.isRequired,
-  downloadPharmaCare: PropTypes.func.isRequired,
   getPharmaCareContent: PropTypes.func.isRequired
 };
 

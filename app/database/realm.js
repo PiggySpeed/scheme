@@ -42,6 +42,7 @@ const realm = new Realm({
 // Methods
 export const storePharmaCare = (data) => {
   let { pharmaCare, pharmaCareChapters, pharmaCareContent } = data;
+
   realm.write(() => {
     realm.create('PharmaCare', {
       uid: pharmaCare.uid,
