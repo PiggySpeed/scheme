@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import { ScrollView, View, Text, Button } from 'react-native';
 import { colors } from '../../styles';
 
-
 const SettingsRow = ({ text, statusText, buttonText, onPress }) => (
   <View style={styles.row}>
     <View>
@@ -17,8 +16,14 @@ const SettingsRow = ({ text, statusText, buttonText, onPress }) => (
   </View>
 );
 
-const Settings = ({downloadPharmaCare, downloadPharmaCareStatus}) => (
+const Settings = ({downloadPharmaCare, downloadPharmaCareStatus, downloadIds}) => (
   <ScrollView>
+    <SettingsRow
+      text='Download Ids from Server'
+      statusText=''
+      buttonText='Download'
+      onPress={downloadIds}
+    />
     <SettingsRow
       text='Download PharmaCare from Server'
       statusText={downloadPharmaCareStatus}
@@ -29,7 +34,8 @@ const Settings = ({downloadPharmaCare, downloadPharmaCareStatus}) => (
 );
 Settings.propTypes = {
   downloadPharmaCareStatus: PropTypes.string.isRequired,
-  downloadPharmaCare: PropTypes.func.isRequired
+  downloadPharmaCare: PropTypes.func.isRequired,
+  downloadIds: PropTypes.func.isRequired,
 };
 
 const styles = {
@@ -42,6 +48,6 @@ const styles = {
     borderBottomWidth: 1,
     borderBottomColor: '#c1c1c1'
   }
-}
+};
 
 export default Settings;

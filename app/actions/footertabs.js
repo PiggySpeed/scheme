@@ -9,7 +9,6 @@ import {
 export const getPharmaCareChapters = () => {
   return dispatch => {
     const data = retrievePharmaCareChapters();
-
     dispatch({ type: GET_PHARMACARE_CHAPTERS, data });
   }
 };

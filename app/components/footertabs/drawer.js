@@ -6,9 +6,11 @@ import DrawerList from './drawerlist';
 
 const Drawer = ({ activeFooterTab, onTabSelect, onSelectChapter, onClose, pharmaCareChapters }) => (
   <View>
-    <Text>
-      Header
-    </Text>
+    <View style={styles.header}>
+      <Text>
+        Scheme
+      </Text>
+    </View>
     <DrawerTab
       title='Main'
       iconName='ios-home-outline'
@@ -56,6 +58,16 @@ Drawer.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSelectChapter: PropTypes.func.isRequired,
   pharmaCareChapters: PropTypes.array.isRequired
+};
+
+const styles = {
+  header: {
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomColor: '#c1c1c1',
+    borderBottomWidth: 0.5
+  }
 };
 
 export default Drawer;

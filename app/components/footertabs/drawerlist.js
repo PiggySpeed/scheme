@@ -4,6 +4,14 @@ import { TouchableOpacity, StyleSheet, Animated, Easing, Text } from 'react-nati
 import DrawerListItem from './drawerlistitem';
 import DrawerListHeader from './drawerlistheader';
 
+const generateId = (start) => {
+  let id = start;
+  return () => {
+    return id++
+  }
+};
+const getId = generateId(20);
+
 class DrawerList extends Component {
   constructor(props){
     super(props);
@@ -15,7 +23,6 @@ class DrawerList extends Component {
     this.getHeight = this.getHeight.bind(this);
     this.onToggle = this.onToggle.bind(this);
     this.onSelectChapter = this.onSelectChapter.bind(this);
-    this.generateId = this.generateId.bind(this);
   }
   get fullListHeight() {
     return this.props.height * (this.props.chapters.length + 1);
@@ -32,11 +39,8 @@ class DrawerList extends Component {
   }
   onSelectChapter(chapterId) {
     this.setState({ chapterId });
-    this.props.onSelectChapter(this.props.route, chapterId);
     this.props.onClose();
-  }
-  generateId() {
-    return Math.floor(Math.random() * 50);
+    this.props.onSelectChapter(this.props.route, chapterId);
   }
   render() {
     return(
@@ -52,7 +56,7 @@ class DrawerList extends Component {
 
         { this.props.chapters.map( (item, id) =>
           <DrawerListItem
-            key={this.generateId()}
+            key={getId()}
             index={id + 1}
             text={item.title}
             height={this.props.height}

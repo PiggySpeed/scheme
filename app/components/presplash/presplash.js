@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Animated, Button } from 'react-native';
+import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import { colors, logos, layouts } from '../../styles';
 
 class PreSplash extends Component {
@@ -34,21 +34,31 @@ class PreSplash extends Component {
   render() {
     return(
       <View style={layouts.container}>
-        <Text>PreSplash  Screen!!!</Text>
-        <Animated.Image
-          style={[logos.logoSmall, this.getTransform()]}
-          source={require('../../assets/bear-color.png')}
-        />
-        <Button
-          title='Go To Login'
-          onPress={this.props.handleClick}
-        />
+        <Text>Scheme</Text>
+        <TouchableOpacity onPress={this.props.handleClick}>
+          <Text style={styles.entry}>Enter</Text>
+        </TouchableOpacity>
+        <Text>(C) John Lee, 2016</Text>
       </View>
     );
 }
 }
 PreSplash.propTypes = {
   handleClick: PropTypes.func.isRequired
+};
+
+//<Animated.Image
+//  style={[logos.logoSmall, this.getTransform()]}
+//  source={require('../../assets/bear-color.png')}
+///>
+
+const styles = {
+  entry: {
+    color: '#9b9b9b',
+    fontSize: 18,
+    height: 200,
+    width: 100
+  }
 };
 
 export default PreSplash;

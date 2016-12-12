@@ -13,13 +13,6 @@ class Markdown extends Component {
   shouldComponentUpdate(nextProps) {
     return !((this.props.children === nextProps.children) && (this.props.styles === nextProps.styles));
   }
-  //parse(source){
-  //  const mergedStyles = { ...styles, ...this.props.styles };
-  //  const rules = { ...SimpleMarkdown.defaultRules, ...initialRules(mergedStyles), ...this.props.rules };
-  //  const rawBuiltParser = SimpleMarkdown.parserFor(rules);
-  //  const blockSource = source + '\n\n';
-  //  return rawBuiltParser(blockSource, {inline: false});
-  //}
   renderContent() {
     const child = Array.isArray(this.props.children)
       ? this.props.children.join('')
@@ -29,10 +22,8 @@ class Markdown extends Component {
     const rules = _.merge({}, SimpleMarkdown.defaultRules, initialRules(mergedStyles), this.props.rules);
     const rawBuiltParser = SimpleMarkdown.parserFor(rules);
     const blockSource = child + '\n\n';
-
     const syntaxTree = rawBuiltParser(blockSource, {inline: false});
 
-    console.log(syntaxTree);
     return SimpleMarkdown.reactFor(SimpleMarkdown.ruleOutput(rules, 'react'))(syntaxTree)
   };
 
@@ -55,7 +46,8 @@ Markdown.defaultProps = {
 
 const viewStyles = {
   container: {
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    padding: 10
   }
 };
 

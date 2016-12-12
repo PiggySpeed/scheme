@@ -1,45 +1,39 @@
+import { ref } from './constants';
+
 export const getIds = () => {
   // All downloaded content will store their version ids here.
   // When the application opens, it will check with FB if the ids are up-to-date
   // If not, it will request the user to update its content
-  return {
-    pharmaCare: '123'
-  }
+  return ref.child(`updateIds`).once('value')
+    .then( snap => snap.val() )
+    .catch( err => console.warn(`firebase/getIds(): ${err}`));
 };
 
-export const getPharmaCare = () => {
-  const pharmaCare = () => {
+export const getPharmaCare = (pharmaCareId) => {
+
+  const formatData = snap => {
+    const chapters = [];
+    const contents = [];
+    const references = [];
+    snap.child('chapters').forEach( item => {chapters.push(item.val()); return(false)} );
+    snap.child('content').forEach( item => {contents.push(item.val()); return(false)} );
+    snap.child('references').forEach( item => {references.push(item.val()); return(false)} );
+
+    contents.forEach( con => {
+      con.references = references.filter( item => item.id === con.id );
+    });
+
     return {
-      pharmaCare: {
-        uid: '123',
-        title: 'Introduction to PharmaCare'
-      },
-      pharmaCareChapters: [
-        {id: '0', title: 'Chapter 1'},
-        {id: '1', title: 'Chapter 2'},
-        {id: '2', title: 'Chapter 3'}
-      ],
-      pharmaCareContent: [
-        {
-          id: '0',
-          title: 'Chapter 1',
-          text: '## Hallo this is john\n\n### Hello World!\n\nThis is a wonderful day.',
-          references: [{value: 'reference1'}, {value: 'reference2'}, {value: 'reference3'}]
-        },
-        {
-          id: '1',
-          title: 'Chapter 2',
-          text: '## Hallo this is 2\n\n### Hello World 2 !\n\nThis is a wonderful day2222.',
-          references: [{value: 'reference2'} , {value: 'reference213'}, {value: 'reference343'}]
-        },
-        {
-          id: '2',
-          title: 'Chapter 3',
-          text: '## Hallo this 333\n\n### Hello World3333!\n\nThis is a wonderful day3333.',
-          references: [{value: 'reference1242141'}, {value: 'reference2342342'}, {value: 'refere3434'}]
-        }
-      ]
-    }
+      uid: snap.val().uid,
+      title: snap.val().title,
+      chapters: chapters,
+      contents: contents
+    };
   };
-  return pharmaCare();
+
+  return ref.child(`pharmaCare/${pharmaCareId}`).once('value')
+    .then( snap => formatData(snap) )
+    .catch( err => console.warn(`firebase/getIds(): ${err}`));
+
 };
+

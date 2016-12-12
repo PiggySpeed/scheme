@@ -1,7 +1,7 @@
 'use strict';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { downloadPharmaCare } from '../actions/database';
+import { downloadPharmaCare, downloadIds } from '../actions/database';
 
 import { Settings } from '../components';
 
@@ -11,7 +11,7 @@ const mapStateToProps = ({downloadContent}) => {
   }
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({downloadPharmaCare}, dispatch)
+  return bindActionCreators({downloadPharmaCare, downloadIds}, dispatch)
 };
 const SchedulesContainer = connect(mapStateToProps, mapDispatchToProps)(Settings);
 export default SchedulesContainer;

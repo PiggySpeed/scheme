@@ -16,7 +16,6 @@ class PharmaCare extends Component {
     }
   }
   render() {
-
     if(this.props.contentId){
       return (
         <PharmaCareContent
