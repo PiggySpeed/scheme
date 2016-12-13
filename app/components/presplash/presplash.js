@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Animated, TouchableOpacity } from 'react-native';
-import { colors, logos, layouts } from '../../styles';
+import { View, Text, Animated, TouchableOpacity, Image } from 'react-native';
+import { colors, logos, layouts, fontSizes } from '../../styles';
 
 class PreSplash extends Component {
   state = {
@@ -34,9 +34,10 @@ class PreSplash extends Component {
   render() {
     return(
       <View style={layouts.container}>
-        <Text>Scheme</Text>
+        <Image style={[logos.logoLarge]} source={require('../../assets/scheme_splash_logo_hdpi.png')}/>
+        <Text style={{fontSize: fontSizes.l, color: '#c3c3c3'}}>S C H E M E</Text>
         <TouchableOpacity onPress={this.props.handleClick}>
-          <Text style={styles.entry}>Enter</Text>
+          <Text style={styles.entry}>ENTER</Text>
         </TouchableOpacity>
         <Text>(C) John Lee, 2016</Text>
       </View>
@@ -54,7 +55,9 @@ PreSplash.propTypes = {
 
 const styles = {
   entry: {
-    color: '#9b9b9b',
+    marginTop: 40,
+    textAlign: 'center',
+    color: '#c3c3c3',
     fontSize: 18,
     height: 200,
     width: 100

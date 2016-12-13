@@ -28,6 +28,10 @@ export const logos = {
   logoMedium: {
     resizeMode: 'contain',
     width: 100
+  },
+  logoLarge: {
+    resizeMode: 'contain',
+    width: 200
   }
 };
 

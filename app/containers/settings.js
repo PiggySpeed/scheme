@@ -7,7 +7,8 @@ import { Settings } from '../components';
 
 const mapStateToProps = ({downloadContent}) => {
   return {
-    downloadPharmaCareStatus: downloadContent.downloadPharmaCareStatus
+    downloadPharmaCareStatus: downloadContent.downloadPharmaCareStatus,
+    downloadIdsStatus: downloadContent.downloadIdsStatus
   }
 };
 const mapDispatchToProps = (dispatch) => {

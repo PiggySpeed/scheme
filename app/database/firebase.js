@@ -15,6 +15,7 @@ export const getPharmaCare = (pharmaCareId) => {
     const chapters = [];
     const contents = [];
     const references = [];
+
     snap.child('chapters').forEach( item => {chapters.push(item.val()); return(false)} );
     snap.child('content').forEach( item => {contents.push(item.val()); return(false)} );
     snap.child('references').forEach( item => {references.push(item.val()); return(false)} );
@@ -26,8 +27,8 @@ export const getPharmaCare = (pharmaCareId) => {
     return {
       uid: snap.val().uid,
       title: snap.val().title,
-      chapters: chapters,
-      contents: contents
+      chapters,
+      contents
     };
   };
 

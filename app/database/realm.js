@@ -46,7 +46,7 @@ const PharmaCareContent = {
 };
 const realm = new Realm({
   schema: [ContentIds, PharmaCare, PharmaCareChapters, PharmaCareContent, Reference],
-  schemaVersion: 6
+  schemaVersion: 8
 });
 
 const wipeRealm = () => {
@@ -77,21 +77,29 @@ export const retrieveIds = () => {
 };
 
 export const storePharmaCare = (data) => {
-  console.log('data is ', data);
   realm.write(() => {
     realm.create('PharmaCare', {
       uid: data.uid,
       title: data.title
     }, true);
 
-    // will have to save data in separate lists here
+    data.chapters.forEach( item => {
+      realm.create('PharmaCareChapters', {
+        id: item.id,
+        index: item.index,
+        title: item.title
+      }, true);
+    });
 
-    //realm.create('PharmaCareContent', {
-    //  uid: data.uid,
-    //  title: data.title,
-    //  chapters: data.chapters,
-    //  contents: data.content
-    //}, true);
+    data.contents.forEach( item => {
+      realm.create('PharmaCareContent', {
+        id: item.id,
+        title: item.title,
+        text: item.text,
+        references: item.references
+      }, true);
+    });
+
   });
 };
 
@@ -104,18 +112,17 @@ export const retrievePharmaCareChapters = () => {
       title: item.title
     })
   };
-  realm.objects('PharmaCareChapters').map( item => formatData(item));
+  realm.objects('PharmaCareChapters').forEach( item => formatData(item));
+  chapters.sort( (prev, next) => {
+    return prev.index - next.index
+  });
 
   return chapters;
 };
 
 export const retrievePharmaCareContent = (chapterId) => {
-  const tree = realm.objects('PharmaCareContent').map( item => item);
-  console.log('ids is ', tree);
-
   const {id, title, text, references} = realm.objects('PharmaCareContent').find( item => item.id === chapterId );
   const cleanedReferences = references.map( item => item.value );
-  console.log( id, title, text, references);
   return {id, title, text, references: cleanedReferences}
 };
 

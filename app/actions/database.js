@@ -48,7 +48,7 @@ export const downloadPharmaCare = () => {
     dispatch(downloadPharmaCareRequest());
     const pharmaCareId = retrieveIds().pharmaCare;
 
-    getPharmaCare(pharmaCareId)
+    return getPharmaCare(pharmaCareId)
       .then( res => dispatch(downloadPharmaCareSuccess(res)));
   }
 };

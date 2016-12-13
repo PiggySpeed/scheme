@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {
   MainContainer,
   PharmaCareContainer,
-  SplashContainer,
   SchedulesContainer
 } from '../../containers'
 

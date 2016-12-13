@@ -7,7 +7,7 @@ const SettingsRow = ({ text, statusText, buttonText, onPress }) => (
   <View style={styles.row}>
     <View>
       <Text>{text}</Text>
-      <Text>- {statusText || ''}</Text>
+      <Text>{statusText || ''}</Text>
     </View>
     <Button
       title={buttonText}
@@ -16,11 +16,11 @@ const SettingsRow = ({ text, statusText, buttonText, onPress }) => (
   </View>
 );
 
-const Settings = ({downloadPharmaCare, downloadPharmaCareStatus, downloadIds}) => (
+const Settings = ({downloadPharmaCare, downloadIdsStatus, downloadPharmaCareStatus, downloadIds}) => (
   <ScrollView>
     <SettingsRow
       text='Download Ids from Server'
-      statusText=''
+      statusText={downloadIdsStatus}
       buttonText='Download'
       onPress={downloadIds}
     />

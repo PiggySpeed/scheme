@@ -1,2 +1,0 @@
-// for inline styles
-

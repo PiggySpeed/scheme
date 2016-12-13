@@ -7,7 +7,6 @@ import Navbar from '../navbar/navbar';
 import {
   MainContainer,
   PharmaCareContainer,
-  SplashContainer,
   SchedulesContainer,
   SettingsContainer
 } from '../../containers';
@@ -21,11 +20,10 @@ class FooterTabs extends Component {
   }
   getScene(key) {
     const scene = {
-      ['Splash']: <SplashContainer />,
       ['Main']: <MainContainer /> ,
       ['PharmaCare']: <PharmaCareContainer />,
       ['Schedules']: <SchedulesContainer />,
-      ['Settings']: <SettingsContainer />,
+      ['Settings']: <SettingsContainer />
     }[key];
     return scene || <SplashContainer />;
   };

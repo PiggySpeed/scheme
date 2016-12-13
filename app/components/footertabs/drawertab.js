@@ -6,8 +6,9 @@ import { colors, fontSizes } from '../../styles';
 
 const DrawerTab = ({ title, selected, onPress, iconName }) => {
   const color = selected ? colors.drawer.selected : colors.drawer.unselected;
+  const backgroundColor = selected ? colors.drawerBackground.selected : colors.drawerBackground.unselected;
   return(
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, {backgroundColor}]} >
       <Icon
         name={iconName}
         style={styles.icon}
