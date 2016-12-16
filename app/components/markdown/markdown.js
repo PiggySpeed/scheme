@@ -2,8 +2,21 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import SimpleMarkdown from 'simple-markdown'
 import initialRules from '../markdown/rules.js'
+import headerRules from '../markdown/headerrules.js'
 import styles from '../markdown/styles.js'
 import _ from 'lodash';
+
+//var blockRegex = function(regex) {
+//  var match = function(source, state) {
+//    if (state.inline) {
+//      return null;
+//    } else {
+//      return regex.exec(source);
+//    }
+//  };
+//  match.regex = regex;
+//  return match;
+//};
 
 class Markdown extends Component {
   constructor(props){
@@ -19,7 +32,7 @@ class Markdown extends Component {
       : this.props.children;
 
     const mergedStyles = { ...styles, ...this.props.styles };
-    const rules = _.merge({}, SimpleMarkdown.defaultRules, initialRules(mergedStyles), this.props.rules);
+    const rules = _.merge({}, SimpleMarkdown.defaultRules, initialRules(mergedStyles), headerRules(mergedStyles, this.props.onStoreRefs), this.props.rules);
     const rawBuiltParser = SimpleMarkdown.parserFor(rules);
     const blockSource = child + '\n\n';
     const syntaxTree = rawBuiltParser(blockSource, {inline: false});
@@ -29,7 +42,7 @@ class Markdown extends Component {
 
   render() {
     return (
-      <View style={[styles.view, viewStyles.container]}>
+      <View style={[styles.view, viewStyles.container]} onLayout={this.props.onLayout}>
         {this.renderContent(this.props.children)}
       </View>
     )
@@ -37,7 +50,9 @@ class Markdown extends Component {
 }
 Markdown.propTypes = {
   styles: PropTypes.object,
-  rules: PropTypes.object
+  rules: PropTypes.object,
+  onStoreRefs: PropTypes.func,
+  onLayout: PropTypes.func
 };
 Markdown.defaultProps = {
   styles: styles,

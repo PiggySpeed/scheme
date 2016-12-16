@@ -125,11 +125,3 @@ export const retrievePharmaCareContent = (chapterId) => {
   const cleanedReferences = references.map( item => item.value );
   return {id, title, text, references: cleanedReferences}
 };
-
-//const updatePharmaCare = (data) => {
-//  const incomingData = schema();
-//
-//  realm.write(() => {
-//    realm.create('Dog', {name: 'Rex'});
-//  });
-//};

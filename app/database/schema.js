@@ -46,6 +46,11 @@ const REALM_SCHEMA = {
       id: '9c45cefb-168107db',
       title: 'Chapter 1',
       text: '## Hallo this is john\n\n### Hello World!\n\nThis is a wonderful day.',
+      sections: [
+        {id: '9c45cefb-168107db', ref: '1.0', title: 'Section 1'},
+        {id: '9c45cefb-168107db', ref: '1.1', title: 'Section 2'},
+        {id: '9c45cefb-168107db', ref: '1.2', title: 'Section 3'}
+      ],
       references: [
         {id: '9c45cefb-168107db', uid: '324', value: 'reference1'},
         {id: '9c45cefb-168107db', uid: '342', value: 'reference2'},
@@ -56,6 +61,11 @@ const REALM_SCHEMA = {
       id: '0da6b773-d15ac16e',
       title: 'Chapter 2',
       text: '## Hallo this is 2\n\n### Hello World 2 !\n\nThis is a wonderful day2222.',
+      sections: [
+        {id: '0da6b773-d15ac16e', ref: '3.0', title: 'Section 1'},
+        {id: '0da6b773-d15ac16e', ref: '3.1', title: 'Section 2'},
+        {id: '0da6b773-d15ac16e', ref: '3.2', title: 'Section 3'}
+      ],
       references: [
         {id: '0da6b773-d15ac16e', uid: '434', value: 'reference1'},
         {id: '0da6b773-d15ac16e', uid: '622', value: 'reference2'},
@@ -66,6 +76,11 @@ const REALM_SCHEMA = {
       id: 'cbe044b6-3e868043',
       title: 'Chapter 3',
       text: '## Hallo this 333\n\n### Hello World3333!\n\nThis is a wonderful day3333.',
+      sections: [
+        {id: 'cbe044b6-3e868043', ref: '3.0', title: 'Section 1'},
+        {id: 'cbe044b6-3e868043', ref: '3.1', title: 'Section 2'},
+        {id: 'cbe044b6-3e868043', ref: '3.2', title: 'Section 3'}
+      ],
       references: [
         {id: 'cbe044b6-3e868043', uid: '05b84817', value: 'reference1'},
         {id: 'cbe044b6-3e868043', uid: '16519d3a', value: 'reference2'},

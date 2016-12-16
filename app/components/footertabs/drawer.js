@@ -1,18 +1,20 @@
 'use strict';
 import React, { PropTypes } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import DrawerTab from './drawertab';
 import DrawerList from './drawerlist';
+import { logos } from '../../styles';
 
 const Drawer = ({ activeFooterTab, onTabSelect, onSelectChapter, onClose, pharmaCareChapters }) => (
   <View>
     <View style={styles.header}>
-      <Text>
-        Scheme
+      <Image style={[logos.logoSmall]} source={require('../../assets/scheme_logo_small.png')} />
+      <Text style={styles.logoText}>
+        S C H E M E
       </Text>
     </View>
     <DrawerTab
-      title='Main'
+      title='Home'
       iconName='ios-home-outline'
       selected={activeFooterTab === 'Main'}
       onPress={() => {
@@ -61,9 +63,14 @@ Drawer.propTypes = {
 };
 
 const styles = {
+  logoText: {
+    fontSize: 20,
+    paddingLeft: 15
+  },
   header: {
-    height: 45,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 75,
+    paddingLeft: 15,
     alignItems: 'center',
     borderBottomColor: '#c1c1c1',
     borderBottomWidth: 0.5
