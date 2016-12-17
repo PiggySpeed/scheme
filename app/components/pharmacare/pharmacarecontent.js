@@ -6,11 +6,17 @@ import { Markdown } from '../';
 import TableOfContents from './tableofcontents';
 
 const MOCK = [
-  { ref: '1', text: 'About PharmaCare' },
-  { ref: '2', text: 'Coverage Basics' },
-  { ref: '3', text: 'Health Professionals' },
-  { ref: '4', text: 'Plans' },
-  { ref: '5', text: 'FAQ' }
+  { ref: '1', text: 'What is BC PharmaCare?' },
+  { ref: '2', text: 'When is a person considered a B.C. resident for PharmaCare purposes?' },
+  { ref: '3', text: 'Are B.C. residents covered for travel supplies?' },
+  { ref: '4', text: 'Out-of-Province Coverage' },
+  { ref: '5', text: 'Who is responsible for BC PharmaCare?' },
+  { ref: '6', text: 'How does PharmaCare work?' },
+  { ref: '7', text: 'Which drugs and medical supplies does PharmaCare cover?' },
+  { ref: '8', text: 'Are there limits on what PharmaCare will cover?' },
+  { ref: '9', text: 'How are claims processed?' },
+  { ref: '10', text: 'Is BC PharmaCare part of the Medical Services Plan?' },
+  { ref: '11', text: 'Other insurers' }
 ];
 
 class PharmaCareContent extends Component {
@@ -45,7 +51,7 @@ class PharmaCareContent extends Component {
       const { title, text, references } = this.props.data;
       return(
         <ScrollView>
-          <Text style={{fontSize: fontSizes.l, padding: 10}}>{title}&nbsp;&nbsp;&nbsp;tree</Text>
+          <Text style={{fontSize: fontSizes.l, padding: 10}}>{title}</Text>
           <TableOfContents data={MOCK} onJumpToSection={this.onJumpToSection} />
           <Markdown onLayout={this.onSetMarkdownY} onStoreRefs={this.onStoreRefs}>
             {text}

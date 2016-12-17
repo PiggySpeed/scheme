@@ -1,4 +1,4 @@
-const styles = {
+export const styles = {
   view: {},
   codeBlock: {
     fontFamily: 'Courier',
@@ -50,14 +50,33 @@ const styles = {
   link: {
     textDecorationLine: 'underline'
   },
-  list: {},
+  list: (level) => {
+    return {
+      paddingLeft: 5*level,
+      backgroundColor: '#c1c1c1',
+      flexDirection: 'row'
+    }
+  },
   listItem: {
+    backgroundColor: 'red',
     flexDirection: 'row'
   },
-  listItemBullet: {
+  listItemBullet:  {
     fontSize: 20,
     lineHeight: 20,
-    marginTop: 6
+    marginTop: 6,
+    marginLeft: 5
+  },
+  listItemBulletType: (level) => {
+    if(level > 2){
+      return '\u2043'
+    }
+    //console.log('level is ', level);
+    return {
+      [0]: '\u2022',
+      [1]: '\u25E6',
+      [2]: '\u2023'
+    }[level]
   },
   listItemNumber: {
     fontWeight: 'bold'

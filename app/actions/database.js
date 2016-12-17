@@ -1,7 +1,10 @@
 import { updateIds, retrieveIds, storePharmaCare, retrievePharmaCareContent } from '../database/realm';
 import { getIds, getPharmaCare } from '../database/firebase';
+import { buildSchema } from '../database/initializefirebase';
 import {
   BUILD_REALM_SCHEMA,
+  INITIALIZE_FIREBASE_REQUEST,
+  INITIALIZE_FIREBASE_SUCCESS,
   DOWNLOAD_IDS_REQUEST,
   DOWNLOAD_IDS_FAILURE,
   DOWNLOAD_IDS_SUCCESS,
@@ -9,6 +12,21 @@ import {
   DOWNLOAD_PHARMACARE_FAILURE,
   DOWNLOAD_PHARMACARE_SUCCESS
 } from './_constants';
+
+// Initialize Firebase with Mock Data
+export const initializeFirebaseRequest = (text) => {
+  return { type: INITIALIZE_FIREBASE_REQUEST, status: text }
+};
+export const initializeFirebaseSuccess = () => {
+  return { type: INITIALIZE_FIREBASE_SUCCESS, status: 'Firebase initialized - Download PharmaCare Data Next' }
+};
+export const initializeFirebase = () => {
+  return dispatch => {
+    buildSchema((text) => dispatch(initializeFirebaseRequest(text)));
+
+    return initializeFirebaseSuccess()
+  }
+};
 
 
 // Get Data Ids

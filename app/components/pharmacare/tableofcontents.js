@@ -5,7 +5,7 @@ import { colors } from '../../styles';
 
 const ListItem = ({text, onPress}) => (
   <TouchableOpacity onPress={onPress}>
-    <Text>
+    <Text style={{marginBottom: 10}}>
       {text}
     </Text>
   </TouchableOpacity>
@@ -43,6 +43,7 @@ const styles = {
     borderWidth: 0.5,
     borderColor: colors.grey,
     margin: 10,
+    marginBottom: 25,
     padding: 10
   }
 };

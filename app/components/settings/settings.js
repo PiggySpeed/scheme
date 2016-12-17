@@ -16,8 +16,14 @@ const SettingsRow = ({ text, statusText, buttonText, onPress }) => (
   </View>
 );
 
-const Settings = ({downloadPharmaCare, downloadIdsStatus, downloadPharmaCareStatus, downloadIds}) => (
+const Settings = ({initializeFirebaseStatus, downloadPharmaCare, downloadIdsStatus, initializeFirebase, downloadPharmaCareStatus, downloadIds}) => (
   <ScrollView>
+    <SettingsRow
+      text='Initialize Firebase with Mock Data'
+      statusText={initializeFirebaseStatus}
+      buttonText='Initialize'
+      onPress={initializeFirebase}
+    />
     <SettingsRow
       text='Download Ids from Server'
       statusText={downloadIdsStatus}
@@ -33,6 +39,7 @@ const Settings = ({downloadPharmaCare, downloadIdsStatus, downloadPharmaCareStat
   </ScrollView>
 );
 Settings.propTypes = {
+  initializeFirebaseStatus: PropTypes.string.isRequired,
   downloadPharmaCareStatus: PropTypes.string.isRequired,
   downloadPharmaCare: PropTypes.func.isRequired,
   downloadIds: PropTypes.func.isRequired,

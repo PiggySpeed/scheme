@@ -34,7 +34,7 @@ const Drawer = ({ activeFooterTab, onTabSelect, onSelectChapter, onClose, pharma
       onClose={onClose}
     />
     <DrawerTab
-      title='Schedules'
+      title='Drug Schedules'
       iconName='ios-list-box'
       selected={activeFooterTab === 'Schedules'}
       onPress={() => {

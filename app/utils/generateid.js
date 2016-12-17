@@ -17,3 +17,8 @@ export const generateIdShort = () => {
   };
   return s4() + s4();
 };
+
+
+//for(var i = 0; i<10; i++){
+//  console.log(generateId());
+//}

@@ -1,7 +1,32 @@
-import React, { createElement } from 'react'
+import React, { Component, createElement } from 'react'
 import { Image, Text, View, Linking } from 'react-native'
+import {styles} from './styles';
+
+class ListText extends Component {
+  shouldComponentUpdate(nextProps){
+    return nextProps.listLevel !== this.props.listLevel
+  }
+  render() {
+    var margin = 5*this.props.listLevel;
+    console.log(margin);
+    return (
+      <Text style={{marginLeft: margin}}>
+        {this.props.children} {margin}
+      </Text>
+    )
+  }
+}
+
 
 const noop = () => {};
+const generateId = (id) => {
+  var count = id;
+  return () => {
+    //console.log('madekey');
+    return id++
+  }
+};
+const getId = generateId(400);
 
 const initialRules = (styles) => {
   return {
@@ -106,8 +131,15 @@ const initialRules = (styles) => {
       }
     },
     list: {
+      indentLevel: 0,
       parse: function(capture, parse, state) {
-        //console.log(capture);
+        //var firstSpace = capture[0].match(/^ *(?:-)/)[0].length;
+        //var firstSpaceRegex = new RegExp("(^ {1," + (firstSpace) + "})", "gm");
+        //var newCapture = capture[0].replace(firstSpaceRegex, '');
+        //console.log(newCapture);
+        //console.log('state level is ', this.trees, state.inline);
+        ++this.indentLevel;
+        var indentLevel = this.indentLevel;
 
         var bullet = capture[2];
         var ordered = bullet.length > 1;
@@ -123,50 +155,50 @@ const initialRules = (styles) => {
           "gm"
         ); // /( *)((?:[*+-]|\d+\.)) +[^\n]*(?:\n(?!\1(?:[*+-]|\d+\.) )[^\n]*)*(\n|$)/gm
 
+
+
         var BLOCK_END_R = /\n{2,}$/;
         var LIST_BLOCK_END_R = BLOCK_END_R;
         var LIST_ITEM_END_R = / *\n+$/;
-        //console.log(capture[0].replace(LIST_BLOCK_END_R, "\n\n").match(LIST_ITEM_R));
         var items = capture[0]
           .replace(LIST_BLOCK_END_R, "\n\n")
-          .match(/( *)(?:[*+-]|\d+\.) +[^\n]*(?:\n(?!\1(?:[*+-]|\d+\.))[^\n]*)*(\n|$)/gm); // There is something wrong with this. It is not matching nested lists properly
-        //console.log(items);
+          //.replace(firstSpaceRegex, '')
+          .match(LIST_ITEM_R);
 
-        //const testing = capture[0]
+        //var newspace = LIST_ITEM_PREFIX_R.exec(capture[0])[0];
+        //console.log(newspace);
+
+
+        //var firstSpaceRegex = new RegExp("(^ {1," + (firstSpace-1) + "})");
+        //var newContent = newCapture[0]
+        //  .match(LIST_ITEM_R);
+        //console.log(newContent);
+
+        //console.log(items);
+        //var spc = capture[0].match(/(^ +)/)[0].length;
+        //var reg = new RegExp(`^ {${spc}}- .*`, 'gm');
+        //console.log('spc is ', spc, 'reg is ', reg);
+        //var items2 = capture[0]
         //  .replace(LIST_BLOCK_END_R, "\n\n")
-        //  .match(/^(- ) +[^\n]*/gm);
-        var testing = capture[0].split('\n');
-        var test2 = testing.filter( item => {return item.search(/^( {4})-/)});
-        console.log(test2);
+        //  .match(reg);
 
         var lastItemWasAParagraph = false;
-
         // Take the current list hierarchy and parse over each item
         var itemContent = items.map(function(item, i) {
-          state.level = 'tree' + i;
+          //console.log(item);
 
           // We need to see how far indented this item is:
-          //console.log("first item is ", item[0]);
           var space = LIST_ITEM_PREFIX_R.exec(item)[0].length;
           // And then we construct a regex to "unindent" the subsequent
           // lines of the items by that amount:
-          var spaceRegex = new RegExp("(^ {1, " + space + "})");
-          //var spaceRegex = new RegExp("(^ {4,})", "gm");
-          var spaceRegex2 = new RegExp("(^ {8})", "gm");
+          var spaceRegex = new RegExp("(^ {1," + (space-1) + "})", "gm");
 
           // Before processing the item, we need a couple things
           var content = item
           // remove indents on trailing lines:
-          // <<<<< This line was causing it to not work
-          //  .replace(spaceRegex2, 'catcat')
             .replace(spaceRegex, '')
             // remove the bullet:
             .replace(LIST_ITEM_PREFIX_R, '');
-
-          console.log(state.level);
-
-          //var tree = item.match(/ {4}- /g);
-          //console.log('tree is ', tree);
 
           // Handling "loose" lists, like:
           //
@@ -175,9 +207,6 @@ const initialRules = (styles) => {
           //  * as is this
           //
           //  * as is this
-
-          //console.log('f', items[i]);
-
           var isLastItem = (i === items.length - 1);
           var containsBlocks = content.indexOf("\n\n") !== -1;
 
@@ -197,6 +226,7 @@ const initialRules = (styles) => {
           var oldStateList = state._list;
           state._list = true;
 
+
           // Parse inline if we're in a tight list, or block if we're in
           // a loose list.
           var adjustedContent;
@@ -205,10 +235,9 @@ const initialRules = (styles) => {
             adjustedContent = content.replace(LIST_ITEM_END_R, "\n\n");
           } else {
             state.inline = true;
-            adjustedContent = content.replace(LIST_ITEM_END_R, ""); // <<<<<<< Also needed to add \n to this
+            adjustedContent = content.replace(LIST_ITEM_END_R, "\n"); // <<<<<<< Also needed to add \n to this
           }
 
-          //console.log(adjustedContent, state);
           var result = parse(adjustedContent, state);
 
           // Restore our state before returning
@@ -216,35 +245,40 @@ const initialRules = (styles) => {
           state._list = oldStateList;
           return result;
         });
+        this.indentLevel--;
         return {
           ordered: ordered,
           start: start,
           items: { // <<<<<<<< Split this into an object so we can pass data to renderer
             itemContent: itemContent,
-            level: 'awefawef'}
+            level: indentLevel}
         };
       },
       react: (node, output, state) => {
         const items = node.items.itemContent.map( (item, i) => {
-          //console.log(item);
           let bullet;
           if (node.ordered) {
             bullet = createElement(Text, { key: state.key, style: styles.listItemNumber  }, (i + 1) + '. ')
           }
           else {
+            var bulletLevel = (node.items.level/1) - 1;
+            var bull = bulletLevel === 0 ? 0 : bulletLevel * 2;
+            var indents = '  '.repeat(bull);
+            var bulletChar = styles.listItemBulletType
+              ? indents + `${styles.listItemBulletType(bulletLevel)} `
+              : indents + '\u2022 ';
+
             bullet = createElement(Text, {
               key: state.key, style: styles.listItemBullet
-            }, styles.listItemBulletType ? `${styles.listItemBulletType} ` : '\u2022 ')
+            }, bulletChar)
           }
-          const listItemText = createElement(Text, { key: state.key + 1, style: styles.listItemText }, output(item, state));
-          //console.log(listItemText.props);
+          const listItemText = createElement(Text, { key: getId() }, output(item, state));
           return createElement(Text, {
-            key: i,
-            style: styles.listItem
-          }, [bullet, listItemText])
+            key: getId()
+          }, [bullet, listItemText]);
         });
-        //console.log(node.items.level);
-        return createElement(Text, { key: state.key, style: styles.list }, items)
+
+        return createElement(Text, { key: getId() }, items);
       }
     },
     newline: {

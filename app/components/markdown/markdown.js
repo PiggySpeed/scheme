@@ -31,7 +31,7 @@ class Markdown extends Component {
       ? this.props.children.join('')
       : this.props.children;
 
-    const mergedStyles = { ...styles, ...this.props.styles };
+    const mergedStyles = { ...styles }; // this.props.styles
     const rules = _.merge({}, SimpleMarkdown.defaultRules, initialRules(mergedStyles), headerRules(mergedStyles, this.props.onStoreRefs), this.props.rules);
     const rawBuiltParser = SimpleMarkdown.parserFor(rules);
     const blockSource = child + '\n\n';

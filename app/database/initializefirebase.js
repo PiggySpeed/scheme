@@ -1,13 +1,16 @@
 import { ref, MOCK_DATA } from './constants';
 import { generateIdShort } from '../utils/generateid';
 
-export const buildSchema = () => {
+export const buildSchema = (cb) => {
+  cb('INITIALIZING FIREBASE');
+
   // Setting Ids
   const pharmaCareId = ref.child('pharmaCare').push().key;
   ref.child(`updateIds`).set({
     pharmaCare: pharmaCareId
   });
   console.log('ADDED PHARMACARE UID');
+  cb('ADDED PHARMACARE UID');
 
   // Setting PharmaCare
   ref.child(`pharmaCare/${pharmaCareId}`).set({
@@ -18,7 +21,7 @@ export const buildSchema = () => {
 
   // Adding Chapters to PharmaCare
   const chapterIds = [];
-  MOCK_DATA.pharmaCareChapters.forEach( item => {
+  MOCK_DATA.PharmaCareChapters.forEach( item => {
     //const chapterId = ref.child(`pharmaCare/${pharmaCareId}/chapters`).push().key;
     chapterIds.push({id: item.id});
     ref.child(`pharmaCare/${pharmaCareId}/chapters/${item.id}`).set({
@@ -28,10 +31,11 @@ export const buildSchema = () => {
     });
   });
   console.log('ADDED CHAPTERS');
+  cb('ADDED CHAPTERS');
 
   // Adding Content to PharmaCare
   chapterIds.forEach( item => {
-    const content = MOCK_DATA.pharmaCareContent.find( con => con.id === item.id );
+    const content = MOCK_DATA.PharmaCareContent.find( con => con.id === item.id );
     ref.child(`pharmaCare/${pharmaCareId}/content/${item.id}`).set({
       id: item.id,
       title: content.title,
@@ -39,10 +43,11 @@ export const buildSchema = () => {
     });
   });
   console.log('ADDED CONTENT');
+  cb('ADDED CONTENT');
 
   // Adding References to PharmaCare
   chapterIds.forEach( (item, id) => {
-    const references = MOCK_DATA.pharmaCareContent.find( con => con.id === item.id).references;
+    const references = MOCK_DATA.PharmaCareContent.find( con => con.id === item.id).references;
     references.forEach( reference => {
       ref.child(`pharmaCare/${pharmaCareId}/references/${item.id}`).set({
         id: item.id,
@@ -52,4 +57,7 @@ export const buildSchema = () => {
     });
   });
   console.log('ADDED CHAPTER REFERENCES');
+  cb('ADDED CHAPTER REFERENCES');
+  cb('Operation Complete. \nDownload all the data into Realm.');
+
 };

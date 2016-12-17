@@ -1,12 +1,25 @@
 import * as types from '../actions/_constants';
 
 const initialState = {
+  initializeFirebaseStatus: '',
   downloadIdsStatus: '',
   downloadPharmaCareStatus: ''
 };
 
 export const downloadContent = (state = initialState, action) => {
   switch(action.type) {
+    case types.INITIALIZE_FIREBASE_REQUEST: {
+      return {
+        ...state,
+        initializeFirebaseStatus: action.status
+      }
+    }
+    case types.INITIALIZE_FIREBASE_SUCCESS: {
+      return {
+        ...state,
+        initializeFirebaseStatus: action.status
+      }
+    }
     case types.DOWNLOAD_IDS_REQUEST: {
       return {
         ...state,
